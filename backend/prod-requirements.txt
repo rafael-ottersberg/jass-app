@@ -1,0 +1,15 @@
+Flask==2.0.3
+Flask-APScheduler==1.12.3
+Flask-Mail==0.9.1
+Flask-SQLAlchemy==2.5.1
+Flask-HTTPAuth==4.5.0
+Flask-Cors==3.0.10
+Pillow==9.1.1
+pyheif==0.7.0
+whatimage==0.0.3
+itsdangerous==2.0.1
+passlib==1.7.4
+Werkzeug==2.0.3
+greenlet==0.4.17
+pywebpush==1.14.0
+natsort==8.1.0

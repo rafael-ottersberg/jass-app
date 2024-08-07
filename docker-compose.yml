@@ -1,0 +1,30 @@
+version: '3.5'
+services:
+  ingress:
+    image: nginx:latest
+    volumes:
+      - './deployment/nginx.conf:/etc/nginx/nginx.conf'
+    ports:
+      - '8877:80'
+    depends_on:
+      - frontend
+      - backend
+  frontend:
+    image: rafaelottersberg/jassapp-frontend
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - './build:/usr/share/nginx/html'
+  backend:
+    image: rafaelottersberg/jassapp-backend
+    build:
+      dockerfile: Dockerfile
+      context: backend
+    volumes:
+      - './backend/api:/app/api'
+    env_file:
+      - './secrets.env'
+    environment:
+      IMAGE_SIZE: 800
+      IMAGE_QUALITY: 85

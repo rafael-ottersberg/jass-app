@@ -1,0 +1,5 @@
+img {
+    border-radius: 2%;
+    height: min(20vh, 247px, 30vw);
+    width: calc( min(20vh, 247px, 30vw) * 161/247)
+}

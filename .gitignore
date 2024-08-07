@@ -1,0 +1,12 @@
+node_modules/
+public/static/video/teaser_small.mp4
+public/static/video/teaser_camp.mp4
+**/__pycache__/
+*.pyc
+**.sqlite
+**/c.json
+**/secrets.env
+deployment/teaser_camp.mp4
+.idea
+secrets.env
+**/storage/images/**

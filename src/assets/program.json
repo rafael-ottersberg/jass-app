@@ -1,0 +1,268 @@
+{
+  "program": [
+    {
+      "name": "Check-in",
+      "time": "2022-05-26T09:00:00.000Z",
+      "meet": "Eingangs Camp-Gelände",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Plenum 1: Hochzeit von Kana",
+      "time": "2022-05-26T12:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Bezirksbattle",
+      "time": "2022-05-26T13:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4"]
+    },
+    {
+      "name": "Camp-eigener Start",
+      "time": "2022-05-26T13:00:00.000Z",
+      "meet": "Festivalgelände",
+      "camp": ["five"]
+    },
+    {
+      "name": "Nachtessen",
+      "time": "2022-05-26T16:00:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Begleitpersonentreff (nur für Begleitpersonen)",
+      "time": "2022-05-26T16:45:00.000Z",
+      "meet": "Helfenden-Treff",
+      "camp": ["helfer"]
+    },
+    {
+      "name": "Plenum 2: Jesus + Zachäus",
+      "time": "2022-05-26T18:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Gelände-Game",
+      "time": "2022-05-26T19:00:00.000Z",
+      "meet": "wird noch mitgeteilt",
+      "camp": ["4"]
+    },
+    {
+      "name": "Grill & Chill",
+      "time": "2022-05-26T19:00:00.000Z",
+      "meet": "wird noch mitgeteilt",
+      "camp": ["five", "helfer"]
+    },
+    {
+      "name": "Bezirkszeit",
+      "time": "2022-05-26T21:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4"]
+    },
+    {
+      "name": "Morgenessen",
+      "time": "2022-05-27T06:00:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Worshipsession (freiwillig)",
+      "time": "2022-05-27T06:45:00.000Z",
+      "meet": "Bühne auf dem Festivalgelände",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Morningshow",
+      "time": "2022-05-27T07:30:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Bezirkszeit",
+      "time": "2022-05-27T08:30:00.000Z",
+      "meet": "individuell",
+      "camp": ["4"]
+    },
+    {
+      "name": "Input Vertiefung",
+      "time": "2022-05-27T08:30:00.000Z",
+      "meet": "wird noch mitgeteilt",
+      "camp": ["five", "helfer"]
+    },
+    {
+      "name": "Helfende Meeting",
+      "time": "2022-05-27T08:30:00.000Z",
+      "meet": "Helfende-Treff",
+      "camp": ["helfer"]
+    },
+    {
+      "name": "Mittagessen",
+      "time": "2022-05-27T10:30:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Workshop Durchgang 1",
+      "time": "2022-05-27T12:15:00.000Z",
+      "meet": "individuell",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Workshop Durchgang 2",
+      "time": "2022-05-27T14:15:00.000Z",
+      "meet": "individuell",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Nachtessen",
+      "time": "2022-05-27T16:00:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Begleitpersonentreff (nur für Begleitpersonen)",
+      "time": "2022-05-27T16:45:00.000Z",
+      "meet": "Helfenden-Treff",
+      "camp": ["helfer"]
+    },
+    {
+      "name": "Plenum 3: Jesus + Maria & Marta",
+      "time": "2022-05-27T18:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Game & Fun",
+      "time": "2022-05-27T19:00:00.000Z",
+      "meet": "wird noch mitgeteilt",
+      "camp": ["4"]
+    },
+    {
+      "name": "Game Night",
+      "time": "2022-05-27T19:00:00.000Z",
+      "meet": "wird noch mitgeteilt",
+      "camp": ["five", "helfer"]
+    },
+    {
+      "name": "Bezirkszeit",
+      "time": "2022-05-27T21:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4"]
+    },
+    {
+      "name": "Morgenessen",
+      "time": "2022-05-28T06:00:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Worshipsession (freiwillig)",
+      "time": "2022-05-28T06:45:00.000Z",
+      "meet": "Bühne auf dem Festivalgelände",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Morningshow",
+      "time": "2022-05-28T07:30:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Bezirkszeit",
+      "time": "2022-05-28T08:30:00.000Z",
+      "meet": "individuell",
+      "camp": ["4"]
+    },
+    {
+      "name": "Input Vertiefung",
+      "time": "2022-05-28T08:30:00.000Z",
+      "meet": "wird noch mitgeteilt",
+      "camp": ["five", "helfer"]
+    },
+    {
+      "name": "Helfende Meeting",
+      "time": "2022-05-28T08:30:00.000Z",
+      "meet": "Helfende-Treff",
+      "camp": ["helfer"]
+    },
+    {
+      "name": "Mittagessen",
+      "time": "2022-05-28T10:30:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Workshop Durchgang 1",
+      "time": "2022-05-28T12:15:00.000Z",
+      "meet": "individuell",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Workshop Durchgang 2",
+      "time": "2022-05-28T14:15:00.000Z",
+      "meet": "individuell",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Nachtessen",
+      "time": "2022-05-28T16:00:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Begleitpersonentreff (nur für Begleitpersonen)",
+      "time": "2022-05-28T16:45:00.000Z",
+      "meet": "Helfenden-Treff",
+      "camp": ["helfer"]
+    },
+    {
+      "name": "Plenum 4: Jesus + Pharisäer Simon",
+      "time": "2022-05-28T18:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Festival Time",
+      "time": "2022-05-28T19:00:00.000Z",
+      "meet": "Festival Gelände",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Bezirkszeit",
+      "time": "2022-05-27T21:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4"]
+    },
+    {
+      "name": "Morgenessen",
+      "time": "2022-05-29T06:00:00.000Z",
+      "meet": "Speisesaal",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Morningshow",
+      "time": "2022-05-29T07:00:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Putzen und Aufräumen",
+      "time": "2022-05-29T07:45:00.000Z",
+      "meet": "individuell",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Plenum 5: Jesus + Du",
+      "time": "2022-05-29T08:45:00.000Z",
+      "meet": "Plenumshalle",
+      "camp": ["4", "five", "helfer"]
+    },
+    {
+      "name": "Lunch fassen und Abreise",
+      "time": "2022-05-29T10:15:00.000Z",
+      "meet": "individuell",
+      "camp": ["4", "five"]
+    }
+  ]
+}

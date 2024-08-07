@@ -1,0 +1,236 @@
+{
+  "workshops": [
+    {
+      "title": "Unihockey",
+      "category": "Sport",
+      "number": 1,
+      "name": "Micha Zürcher & Filip Karlsson",
+      "description": "Wir werden miteinander ein Unihockey-Training absolvieren. Dabei werden Grundlagen erlernt, Tipps gegeben und vor allem viel Unihockey gespielt!",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "(Tanz-)Akrobatik: moving in space or moving the space?",
+      "category": "Sport",
+      "number": 2,
+      "name": "Clarissa Matter",
+      "description": "Hast du Lust die Mehrdimensionalität deines Körpers neu zu entdecken? Von Bodenelementen bis Partnerakrobatik - wir probieren aus, was am „meischte fägt“: Fallen, Rollen, Springen, Balance, Kopfüber sein, Loslassen, Explodieren, Zweimannhoch? Du brauchst keine Vorkenntnisse, nur Lust auf Bewegung!",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Skateboard & Scooter",
+      "category": "Sport",
+      "number": 3,
+      "name": "Marco Niederhäuser",
+      "description": "Skateboard und/oder Scooter fahren egal auf welchem Level. Gemeinsam den Fun an diesen tollen Freestyle-Sportarten entdecken und einander mit Tipps und Tricks zur Seite stehen.",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Beach Volleyball",
+      "category": "Sport",
+      "number": 4,
+      "name": "Merel Boner",
+      "description": "Sonnencrème und -brille montiert? Mach dich bereit auf ein paar Ballübungen und dann viel Spiel! Wir werden zusammen herausfinden, was es braucht, damit du dich technisch wohlfühlst und natürlich punkten kannst.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Orientierungslauf – invited to the forest",
+      "category": "Sport",
+      "number": 5,
+      "name": "Ueli Werren",
+      "description": "Du erhältst einen OL-Crash-Kurs mit wertvollen Insider-Tipps vom Profi, bevor du dich in einem kurzen Wettkampf in 2er Gruppen mit anderen misst. Findest du den Weg?!",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Schwingen",
+      "category": "Sport",
+      "number": 6,
+      "name": "Marc Hänni",
+      "description": "Der faire Kampf Frau gegen Frau oder Mann gegen Mann im Sägemehl: Das ist Schwingen. Wir lernen gemeinsam die Grundlagen des Schwingens kennen. Wer seine/n Gegner:in auf den Rücken legt, gewinnt.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Klettern",
+      "category": "Sport",
+      "number": 7,
+      "name": "Kathrin Habegger, Jael Meier, Mael Schaad & Christian Rolli",
+      "description": "Du erklimmst über eine auf deine Fähigkeiten berücksichtigende Route die 13m hohe Indoor-Kletterwand und bist dabei immer an einem Seil von oben gesichert. Die fachkundige Leitung gibt dir dabei hilfreich Tips und Tricks für diese neue olympische Disziplin.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Hip Hop",
+      "category": "Sport",
+      "number": 8,
+      "name": "Catia Iadeluca",
+      "description": "Lass dich mitreissen vom Hip Hop Groove! Wir lernen HipHop Grundschritte und Elemente, welche wir in kleinen Sequenzen anwenden und Freestyle-Techniken. Im Vordergrund steht die Freude am Tanzen, das Gefühl für den Rhythmus und den Groove. Für Anfänger bis Fortgeschrittene.",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Tanz - Breakdance",
+      "category": "Sport",
+      "number": 9,
+      "name": "David Boner",
+      "description": "Wir werden zusammen eine Choreo im Tanzstiel «breakdance» lernen. Wie sieht das ungefähr aus? Unter folgendem <a href='https://drive.google.com/file/d/14gAlmoi7hhbqNRpne3vMONCSP9BvXmKA/view?usp=sharing'>Link<a> findest du ein Video. Entweder werden wir diese Choreo (leicht angepasst) lernen oder dann etwas ähnliches.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Tanz - Contemporary",
+      "category": "Sport",
+      "number": 10,
+      "name": "David Boner",
+      "description": "Wir werden zusammen eine Choreo im Tanzstiel «contemporary» lernen. Wie sieht das ungefähr aus? Unter folgendem <a href='https://drive.google.com/file/d/1e5iHBw1kBTpiuQABcePe0lX-eb78ckJH/view?usp=sharing'>Link<a> findest du ein Video. Entweder werden wir diese Choreo (leicht angepasst) lernen oder dann etwas ähnliches.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Lippenpflege selbstgemacht",
+      "category": "Kreativ",
+      "number": 11,
+      "name": "Janine Meyer",
+      "description": "Stelle deine eigene Lippenpomade aus natürlichen Inhaltsstoffen her.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Büchsen-Upcycling",
+      "category": "Kreativ",
+      "number": 12,
+      "name": "Carola Anklin, Chantal Wildhaber",
+      "description": "Gebrauchte, alte Büchsen in allen Grössen und Varianten in neue, hübsche und praktische Behälter upcyceln. Wir bieten verschiedene Techniken an, z. B. mit Hammer/Ahle/ Nägel Muster machen, Krakelieren (das ist ein Lack, der sich beim Trocknen zusammenzieht und Risse/Sprünge hinterlässt), Verzierungen mit ganz vielen verschiedenen Servietten/Bänder/Schnüren/Spitze und natürlich auch ganze viele verschiedene Farben.",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Warum (Wyland) Worship",
+      "category": "Kreativ",
+      "number": 13,
+      "name": "Wyland Worship",
+      "description": "Wir wollen unser Herzensanliegen als Band teilen und gemeinsam darüber nachdenken, was wir unter Anbetung verstehen und wie wir Lobpreis mitreissend gestalten können. Neben einem Q&A besteht im Anschluss des Workshops die Möglichkeit sich in Geartalks (Nerd-Gespräche) über Musikequipment zu verlieren.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Essbare Wildpflanzen- suchen, finden, sammeln, essen",
+      "category": "Outdoor",
+      "number": 14,
+      "name": "Franziska Höhne-Bleisch",
+      "description": "Zusammen machen wir uns auf die Suche nach essbaren Wildpflanzen. Wir lernen sie kennen, sammeln und verarbeiten sie zu einem feinen Kräutersalz.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Pilgern - was geht?",
+      "category": "Outdoor",
+      "number": 15,
+      "name": "Markus da Rugna",
+      "description": "350'000 Pilgernde sind jedes Jahr nach Santiago unterwegs. Was ist pilgern? Warum soll ich pilgern? Welche Erfahrungen sind möglich? Inputs und Selbst-Erfahrungen dazu.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Pizzaofen im Jungschi-Style",
+      "category": "Outdoor",
+      "number": 16,
+      "name": "David Frei, Michael Blarer",
+      "description": "Pizza selber machen kennt jede:r. Wie wäre es damit, auch den Ofen dazu selbst zu bauen? Gemeinsam graben wir am Freitagnachmittag einen Pizzaofen.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Spiritualität - neue Zugänge zur Gottesbewegung",
+      "category": "Glaube",
+      "number": 17,
+      "name": "Chris Forster",
+      "description": "Spiritualität bezeichnet das Erleben und den Austausch mit der übernatürlichen uns umgebenden Wirklichkeit. Der Mensch ist grundsätzlich ein spirituelles Wesen. Wie aber erleben wir christli-che Spiritualität, die sowohl unseren Intellekt, unsere Seele und unser ganzes Sein berührt? Wir machen uns auf Spurensuche und entdecken unsere eigenen Zugänge zur Spiritualität.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Abendmahl",
+      "category": "Glaube",
+      "number": 18,
+      "name": "Chris Forster",
+      "description": "Das Abendmahl gehört zu den Merkmalen des christlichen Glaubens. Von Jesus selber eingeführt gehört das AM zu den Sakramenten (). In 2’000 Jahren Kirchengeschichte haben sich Form und Tradition gebildet. Entspricht dies aber dem, was Jesus an jenem Abend vor seinem Tod eingeführt hat oder müssen wir das Abendmahl neu für uns entdecken. Zusammen schauen wir die Anfänge an und entdecken neue Zugänge zum traditionellen Abendmahl.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Glaube und Stacheldraht",
+      "category": "Glaube",
+      "number": 19,
+      "name": "Micha Ripper, Alina Ring",
+      "description": "Hat in der Kirche jeder Glaube Platz? Wenn nicht, was muss man denn genau glauben oder ablehnen als Christ oder Christin? Und was darf man hinterfragen? Wo ziehe ich die Grenze zwischen „gläubig“ und „andersgläubig“ und wie gehe ich damit um, dass andere sie anders ziehen? Wir loten unsere eigenen Toleranzgrenzen aus und diskutieren darüber, wie wir mit der Vielfalt in unseren Kirchen umgehen können, wo es Abgrenzung braucht und wo Offenheit.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Gerüchteküche",
+      "category": "Glaube",
+      "number": 20,
+      "name": "Micha Rippert, Lisa de Andrade",
+      "description": "„Die Kirche behauptete lange, die Erde sei eine Scheibe!“ „Inquisition, Hexenverbrennung, Kreuzzüge!“ „Wunder lassen sich wissenschaftlich erklären!“ SA„Jesus war verheiratet!“ – Die Gerüchteküche brodelt heiss, wenn es um Kirche und Christentum geht. Hinter welchen Vorurteilen steckt ein Fünkchen Wahrheit? Welche schaffen es, uns zu verunsichern? Und wo finden wir gute Antworten darauf? Wir diskutieren die beliebtesten Klischees und wagen uns furchtlos in die schwarzen Löcher des Christentums.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Hoffnung ist lernbar",
+      "category": "Glaube",
+      "number": 21,
+      "name": "Philipp Kohli",
+      "description": "Der Workshop lädt ein, Hoffnung zu verstehen und als aktive Lebenshaltung einzuüben. Dabei kommen biblische Grundaussagen zur Hoffnung ebenso zum Tragen wie wissenschaftliche Erkenntnisse zur Hoffnung. (In Bezug auf den Soziologen Stefan Marks).",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Jesus am Tisch – Warum Jesus so gern mit andern gegessen und getrunken hat und was das mit uns zu tun hat",
+      "category": "Glaube",
+      "number": 22,
+      "name": "Stefan Zürcher",
+      "description": "«Vielfrass und Säufer», so wurde Jesus einmal sogar beschimpft. Offenbar ist seinen Gegnern aufgefallen, wie häufig Jesus mit den unterschiedlichsten Menschen gegessen und getrunken hat. Überhaupt erzählen die Evangelien überraschend viele Geschichten, in denen Miteinander-Essen und -Trinken vorkommt. – Was steckt dahinter? Was bedeutete es damals, gemeinsam zu essen und zu trinken? Was können wir heute von Jesus und den biblischen Geschichten lernen?",
+      "day": "Freitag"
+    },
+    {
+      "title": "Theologie studieren?",
+      "category": "Glaube",
+      "number": 23,
+      "name": "Sarah Bach, Tirza Mürner, Anja Isler, Avi Girschweiler, Christoph Zbinden",
+      "description": "In gemütlichem Ambiente kommst du mit verschiedenen Theologen und Theologiestudierenden ins Gespräch, die an verschiedenen Ausbildungsstätten (THR Reutlingen, Uni, IGW, TDS, ISTL) verschiedene Studiengänge besucht haben. Profitiere von ihren Erfahrungen!",
+      "day": "Samstag"
+    },
+    {
+      "title": "Apocalypse now?",
+      "category": "Gesellschaft",
+      "number": 24,
+      "name": "Cedric Zangger",
+      "description": "Immer wenn sich Krieg und Katastrophen ereignen, sind sie wieder da – die Weltuntergangspropheten. Meist berufen sie sich auf die Offenbarung des Johannes. Was aber steht dort drin und was bedeutet das Wort überhaupt? Zusammen entdecken wir ein Buch voller Bilder und – Hoffnung.",
+      "day": "Freitag"
+    },
+    {
+      "title": "Ein starkes Team",
+      "category": "Schulung",
+      "number": 25,
+      "name": "Claudia Haslebacher",
+      "description": "Der Workshop eignet sich für alle, die...<br/>... gerne möchten, dass ihr Team eine starke Truppe wird<br/>... sich dafür interessieren, was für ein wirkungsvolles, super zusammenarbeitendes Team nötig ist<br/><br/> Was du aus dem Workshop mitnehmen kannst:<br/><ul><li>das Teammodell von Patrick Lencioni</li><li>eine vertiefte Reflexion über dein eigenes Team (oder über deine Vorstellungen von starker Teamarbeit)</li><li>Ideen für die Praxis</li><li>Anregungen wie Teamsitzungen Spass und Sinn machen</li></ul>",
+      "day": "Freitag, Samstag"
+    },
+    {
+      "title": "Depressionen und Angststörungen in der Jugendarbeit",
+      "category": "Schulung",
+      "number": 26,
+      "name": "Natascha Bertschinger",
+      "description": "Depressionen und Angststörungen fordern Leitende von Jugendgruppen immer wieder heraus, sei das in der Integration, im Umgang, in der Seelsorge, so meine Erfahrung aus diversen Beratungsgesprächen. So möchte ich mit dem  Workshop Plattform bieten, um Erfahrungen auszutauschen, und um Hintergrundwissen und Tipps für eure Aufgabe als Leitende Person zu geben.",
+      "day": "Samstag"
+    },
+    {
+      "title": "Suizidprävention und Begleitung Betroffener in der Jugendarbeit",
+      "category": "Schulung",
+      "number": 27,
+      "name": "Natascha Bertschinger",
+      "description": "Im Schnitt begeht in unserem Land laut Bundesamt für Statistik alle vier Tage ein Teenager/Jugendlicher Suizid. Rund 10'000 junge Menschen unternehmen im Jahr einen Suizidversuch. Bereits die Zahlen zeigen, dass auch die Jugendlichen in unseren Angeboten betroffen sind.  Der Workshop bietet die Plattform, um Erfahrungen auszutauschen und um Hintergrundwissen und Tipps für euer Aufgabe als Leitende Person zu erhalten.",
+      "day": "Freitag"
+    },
+    {
+      "title": "(Un)christliche Politik – Meine Verantwortung in diesem Spannungsfeld!",
+      "category": "Gesellschaft",
+      "number": 28,
+      "name": "Elia Leiser",
+      "description": "«Politik ist undurchsichtig.», «PolitikerInnen denken so oder so nur an sich.», «Meine Stimme ändert sowieso nichts.» Das sind vielleicht ein paar Vorurteile, die Du kennst. Warum soll ich dann ausgerechnet da Verantwortung übernehmen?",
+      "day": "Freitag"
+    },
+    {
+      "title": "Stehaufmensch - Was ist Resilienz und wie kann ich sie stärken",
+      "category": "Persönlichkeit",
+      "number": 29,
+      "name": "Barbara Morf Meneghin",
+      "description": "Resilienz beschreibt die Fähigkeit von Menschen, sich in schwierigen Situationen nicht unterkriegen zu lassen, sie aktiv an- und gestärkt aus ihnen hervorzugehen. Man spricht auch von innerer Widerstandskraft oder Erholungsfähigkeit. Wir schauen uns an wie diese Fähigkeit genau aussieht. Ein kurzer Persönlichkeitstest hilft uns, die eigenen Stärken und Schwächen besser zu erkennen und Resilienz gezielt dort aufzubauen, wo sie besonders benötigt wird.",
+      "day": "Freitag"
+    }
+  ]
+}

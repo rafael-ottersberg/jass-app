@@ -1,0 +1,69 @@
+version: '2'
+
+services:
+  ingress:
+    image: nginx:latest
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+    ports:
+      - '${PORT}:80'
+    depends_on:
+      - frontend
+      - backend
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    restart: always
+    networks:
+      camp-net:
+        ipv4_address: ${IP_PREFIX}.5
+
+  frontend:
+    image: ghcr.io/rafael-ottersberg/jass-app/frontend:${IMAGE_TAG}
+    restart: always
+    volumes:
+      - './teaser_camp.mp4:/usr/share/nginx/html/static/video/teaser_camp.mp4:ro'
+      - './${DATA_FOLDER}/storage/images/website:/usr/share/nginx/html/static/web-photos'
+      - './${DATA_FOLDER}/storage/images/check:/usr/share/nginx/html/static/web-photos-check'
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    networks:
+      camp-net:
+        ipv4_address: ${IP_PREFIX}.6
+
+  backend:
+    image: ghcr.io/rafael-ottersberg/jass-app/backend:${IMAGE_TAG}
+    restart: always
+    volumes:
+      - './${DATA_FOLDER}/db.sqlite:/app/api/db.sqlite'
+      - './${DATA_FOLDER}/storage:/app/storage'
+    env_file:
+      - './${DATA_FOLDER}/secrets.env'
+    environment:
+      IMAGE_SIZE: 800
+      IMAGE_QUALITY: 85
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    networks:
+      camp-net:
+        ipv4_address: ${IP_PREFIX}.7
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 30 --cleanup
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    networks:
+      camp-net:
+        ipv4_address: ${IP_PREFIX}.10
+    restart: always
+
+networks:
+  camp-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${IP_PREFIX}.0/16
+          gateway: ${IP_PREFIX}.1
