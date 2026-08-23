@@ -1,5 +1,6 @@
 services:
   ingress:
+    restart: always
     image: nginx:latest
     volumes:
       - './deployment/nginx.conf:/etc/nginx/nginx.conf'
@@ -9,11 +10,13 @@ services:
       - frontend
       - backend
   frontend:
+    restart: always
     image: rafaelottersberg/jassapp-frontend
     build:
       dockerfile: Dockerfile
       context: .
   backend:
+    restart: always
     image: rafaelottersberg/jassapp-backend
     build:
       dockerfile: Dockerfile
@@ -33,6 +36,7 @@ services:
       POSTGRES_USER: jassapp
       POSTGRES_DB: jassapp
   db:
+    restart: always
     image: postgres:16-alpine
     volumes:
       - jassapp-db-data:/var/lib/postgresql/data
