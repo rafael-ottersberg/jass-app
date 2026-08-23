@@ -1,5 +1,3 @@
-version: '2'
-
 services:
   ingress:
     image: nginx:latest
@@ -41,6 +39,7 @@ services:
     environment:
       IMAGE_SIZE: 800
       IMAGE_QUALITY: 85
+      WORKERS: 1
     labels:
       - com.centurylinklabs.watchtower.enable=true
     networks:
