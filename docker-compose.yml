@@ -13,8 +13,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    volumes:
-      - './build:/usr/share/nginx/html'
   backend:
     image: rafaelottersberg/jassapp-backend
     build:
