@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./prod-requirements.txt /app/requirements.txt
 COPY ./api /app/api
+COPY ./prestart.sh /app/prestart.sh
+COPY ./migrations /app/migrations
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -21,4 +23,4 @@ RUN pip install --no-cache-dir --upgrade "pip>=26.2" "setuptools>=83.0.0" \
 
 EXPOSE 80
 
-CMD ["sh", "-c", "gunicorn --workers ${WORKERS:-2} --bind 0.0.0.0:${PORT:-80} api:app"]
+CMD ["sh", "-c", "sh prestart.sh && gunicorn --workers ${WORKERS:-2} --bind 0.0.0.0:${PORT:-80} api:app"]

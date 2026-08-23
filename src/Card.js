@@ -3,7 +3,7 @@ import './Card.css';
 
 function Card(props) {
 
-  const path = "./cards/french/"
+  const path = "/cards/french/"
 
   var colors = {
     "P": "pik",

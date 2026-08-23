@@ -99,7 +99,7 @@ class Game:
                 self.add_to_score(self.current_round.count_points())
 
                 if self.game_finished():
-                    self.state == "finished"
+                    self.state = "finished"
 
 
     def start_next_round(self, first_round=False):
@@ -113,6 +113,37 @@ class Game:
             self.starting_player = self.find_next_player()
 
         self.current_round = Round_mode[self.mode](self.mode, self.sorted_players, self.starting_player)
+
+    def to_dict(self):
+        return {
+            'game_id': self.game_id,
+            'mode': self.mode,
+            'state': self.state,
+            'players': self.players,
+            'final_score': self.final_score,
+            'score': self.score,
+            'teams': self.teams,
+            'score_last_round': self.score_last_round,
+            'sorted_players': self.sorted_players,
+            'starting_player': self.starting_player,
+            'current_round': self.current_round.to_dict(),
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        game = cls.__new__(cls)
+        game.game_id = data['game_id']
+        game.mode = data['mode']
+        game.state = data['state']
+        game.players = data['players']
+        game.final_score = data['final_score']
+        game.score = data['score']
+        game.teams = data['teams']
+        game.score_last_round = data['score_last_round']
+        game.sorted_players = data['sorted_players']
+        game.starting_player = data['starting_player']
+        game.current_round = round_from_dict(data['current_round'])
+        return game
 
 
 class Round:
@@ -370,8 +401,24 @@ class Round:
         points_per_player = dict()
         for player in self.players.keys():
             points_per_player[player] = self.players[player].stiche.count(mode = self.mode, trump = self.trump)
-        
+
         return points_per_player
+
+    def to_dict(self):
+        # player_order preserves turn order explicitly - a JSONB column does not
+        # guarantee dict key order is preserved across a round-trip through Postgres
+        return {
+            'round_class': type(self).__name__,
+            'mode': self.mode,
+            'state': self.state,
+            'trump': self.trump,
+            'number_of_played_stiche': self.number_of_played_stiche,
+            'current_player': self.current_player,
+            'starting_player': self.starting_player,
+            'table': self.table.to_dict(),
+            'player_order': list(self.players.keys()),
+            'players': {name: player.to_dict() for name, player in self.players.items()},
+        }
 
 
 class Table:
@@ -395,6 +442,35 @@ class Table:
                 cards[player] = card_value
 
         return cards
+
+    def to_dict(self):
+        return {
+            'mode': self.mode,
+            'stack': self.stack.get_cards(),
+            'slots': {
+                player: (str(slot.card) if slot.card is not None else None)
+                for player, slot in self.slots.items()
+            },
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        table = cls.__new__(cls)
+        table.mode = data['mode']
+
+        stack = Stack.__new__(Stack)
+        stack.cards = [Card(*card_string.split('/')) for card_string in data['stack']]
+        table.stack = stack
+
+        slots = {}
+        for player, card_string in data['slots'].items():
+            slot = Slot()
+            if card_string is not None:
+                slot.set_card(Card(*card_string.split('/')))
+            slots[player] = slot
+        table.slots = slots
+
+        return table
 
 
 class Slot:
@@ -421,6 +497,24 @@ class Player:
 
     def __str__(self):
         return self.name
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'hand': self.hand.get_cards(),
+            'stiche': self.stiche.get_cards(),
+            'stiche_last_stich': self.stiche.last_stich,
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        player = cls(data['name'])
+        for card_string in data['hand']:
+            player.hand.add_card_from_string(card_string)
+        for card_string in data['stiche']:
+            player.stiche.add_card_from_string(card_string)
+        player.stiche.last_stich = data['stiche_last_stich']
+        return player
 
 
 class Card:
@@ -795,6 +889,28 @@ class ZweierjassRound(Round):
         else:
             self.state = "play"
 
+
+def round_from_dict(data):
+    round_classes = {
+        'Round': Round,
+        'SidiRound': SidiRound,
+        'ZweierjassRound': ZweierjassRound,
+    }
+    round_obj = round_classes[data['round_class']].__new__(round_classes[data['round_class']])
+    round_obj.mode = data['mode']
+    round_obj.state = data['state']
+    round_obj.trump = data['trump']
+    round_obj.number_of_played_stiche = data['number_of_played_stiche']
+    round_obj.current_player = data['current_player']
+    round_obj.starting_player = data['starting_player']
+    round_obj.table = Table.from_dict(data['table'])
+
+    players = OrderedDict()
+    for name in data['player_order']:
+        players[name] = Player.from_dict(data['players'][name])
+    round_obj.players = players
+
+    return round_obj
 
 
 """

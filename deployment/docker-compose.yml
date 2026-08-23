@@ -32,19 +32,40 @@ services:
     image: ghcr.io/rafael-ottersberg/jass-app/backend:${IMAGE_TAG}
     restart: always
     volumes:
-      - './${DATA_FOLDER}/db.sqlite:/app/api/db.sqlite'
       - './${DATA_FOLDER}/storage:/app/storage'
+    depends_on:
+      - db
     env_file:
       - './${DATA_FOLDER}/secrets.env'
     environment:
       IMAGE_SIZE: 800
       IMAGE_QUALITY: 85
       WORKERS: 1
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: jassapp
+      POSTGRES_DB: jassapp
     labels:
       - com.centurylinklabs.watchtower.enable=true
     networks:
       camp-net:
         ipv4_address: ${IP_PREFIX}.7
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+      - './${DATA_FOLDER}/postgres-data:/var/lib/postgresql/data'
+    env_file:
+      - './${DATA_FOLDER}/secrets.env'
+    environment:
+      POSTGRES_USER: jassapp
+      POSTGRES_DB: jassapp
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    networks:
+      camp-net:
+        ipv4_address: ${IP_PREFIX}.8
 
   watchtower:
     image: containrrr/watchtower:latest

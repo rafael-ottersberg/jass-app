@@ -328,7 +328,7 @@ function CarpetContent(props) {
 
     var trumpIcon = <img 
       className="trump-icon select-disable" 
-      src={"./trump/" + trumpOptions[props.trump]} 
+      src={"/trump/" + trumpOptions[props.trump]} 
       alt={props.trump + "_icon"}
     />
   }
@@ -458,7 +458,7 @@ function DefineTrump(props) {
 
   var trumpChoice = Object.keys(trumpOptions).map((key) => 
     <img
-      src={"./trump/" + trumpOptions[key]}
+      src={"/trump/" + trumpOptions[key]}
       alt={key}
       className="trump-image select-disable"
       onClick={() => props.onClick(key)}
