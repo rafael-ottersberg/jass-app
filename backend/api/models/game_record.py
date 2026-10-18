@@ -13,3 +13,5 @@ class GameRecord(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
     state = db.Column(JSONB, nullable=True)
+    # set when the losing team congratulates the winners ("Gratulieren")
+    loser_team = db.Column(db.String(64), nullable=True)

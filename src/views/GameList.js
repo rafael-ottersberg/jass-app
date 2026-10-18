@@ -85,6 +85,19 @@ export default function GameList() {
     }
   };
 
+  const congratulate = async (gameId) => {
+    if (!window.confirm('Dem anderen Team gratulieren? Dein Team gilt damit als Verlierer und das Spiel wird beendet.')) {
+      return;
+    }
+    setError(null);
+    try {
+      await apiClient.post(`/games/${gameId}/congratulate`);
+      fetchGames();
+    } catch (err) {
+      setError(err.response?.data?.message || 'Aktion fehlgeschlagen');
+    }
+  };
+
   const abandonGame = async (gameId) => {
     setError(null);
     try {
@@ -168,7 +181,15 @@ export default function GameList() {
                 <CardContent>
                   <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
                     <Typography variant="h6">{MODE_LABEL[game.mode] || game.mode}</Typography>
-                    <Chip size="small" label={STATUS_LABEL[game.status] || game.status} />
+                    {game.result ? (
+                      <Chip
+                        size="small"
+                        color={game.result === 'won' ? 'success' : 'error'}
+                        label={game.result === 'won' ? 'Gewonnen' : 'Verloren'}
+                      />
+                    ) : (
+                      <Chip size="small" label={STATUS_LABEL[game.status] || game.status} />
+                    )}
                   </Stack>
                   {game.participants.map((p) => (
                     <Typography key={p.username} variant="body2">
@@ -190,7 +211,10 @@ export default function GameList() {
                     <Button size="small" component={Link} to={`/games/${game.id}`}>Öffnen</Button>
                   ) : null}
                   {game.status === 'active' && mine ? (
-                    <Button size="small" color="error" onClick={() => abandonGame(game.id)}>Aufgeben</Button>
+                    <>
+                      <Button size="small" onClick={() => congratulate(game.id)}>Gratulieren</Button>
+                      <Button size="small" color="error" onClick={() => abandonGame(game.id)}>Aufgeben</Button>
+                    </>
                   ) : null}
                   {game.status !== 'active' && game.isCreator ? (
                     <Button size="small" color="error" onClick={() => deleteGame(game.id)}>Löschen</Button>

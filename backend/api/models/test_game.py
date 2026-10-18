@@ -11,6 +11,19 @@ class TestGame(unittest.TestCase):
 
         self.assertEqual(str(gm), gm_string)
 
+    def test_from_dict_does_not_alias_loaded_data(self):
+        # Mutating the loaded Game (e.g. adding a bonus) must not change the
+        # dict it was loaded from, otherwise SQLAlchemy can't detect the change.
+        gm = game.Game(mode='zweier', players=['a', 'b'])
+        gm.start_game({'T1': ['a'], 'T2': ['b']})
+        stored = gm.to_dict()
+
+        loaded = game.Game.from_dict(stored)
+        loaded.add_to_score_team({'T1': 20})
+
+        self.assertEqual(stored['score'], {'T1': 0, 'T2': 0})
+        self.assertEqual(loaded.to_dict()['score'], {'T1': 20, 'T2': 0})
+
     def test_add_player(self):
         gm = game.Game(players=['player1','player2'])
         gm.add_player('player3')

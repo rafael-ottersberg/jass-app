@@ -12,6 +12,9 @@ game_api = Blueprint('game_api', __name__)
 
 stats = NetworkStatistics()
 
+# players who sort their hand in reverse order (compared case-insensitively)
+REVERSE_SORT_PLAYERS = {'andy', 'andi'}
+
 
 def load_active_game(game_id):
     record = GameRecord.query.filter_by(id=game_id, status='active').first()
@@ -51,6 +54,18 @@ def participants_dict(game_id):
     ]
 
 
+def game_result_for_current_user(record):
+    # 'won' / 'lost' from the viewer's perspective once a game ended via "Gratulieren"
+    if record.status != 'finished' or not record.loser_team:
+        return None
+
+    mine = GameParticipant.query.filter_by(game_id=record.id, user_id=g.current_user.id).first()
+    if mine is None:
+        return None
+
+    return 'lost' if mine.team == record.loser_team else 'won'
+
+
 def game_summary_dict(record):
     return {
         'id': record.id,
@@ -59,6 +74,8 @@ def game_summary_dict(record):
         'isCreator': record.created_by_id == g.current_user.id,
         'participants': participants_dict(record.id),
         'score': (record.state or {}).get('score', {}),
+        'loserTeam': record.loser_team,
+        'result': game_result_for_current_user(record),
     }
 
 
@@ -242,6 +259,26 @@ def abandon_game(game_id):
     return jsonify({'done': True})
 
 
+@game_api.route('/api/games/<int:game_id>/congratulate', methods=['POST'])
+@require_auth
+def congratulate(game_id):
+    # The losing team congratulates the winners: ends the game and records
+    # the caller's team as the loser (the other team is shown as winner).
+    record, gm = load_active_game(game_id)
+    if gm is None:
+        return jsonify({'message': 'No active game'}), 404
+
+    require_player_in_game(gm)
+
+    participant = GameParticipant.query.filter_by(game_id=game_id, user_id=g.current_user.id).first()
+
+    record.status = 'finished'
+    record.loser_team = participant.team
+    db.session.commit()
+
+    return jsonify(game_summary_dict(record))
+
+
 @game_api.route('/api/games/<int:game_id>/round-state', methods=['GET'])
 @require_auth
 def get_round_state(game_id):
@@ -361,7 +398,7 @@ def sort_cards(game_id):
     player = require_player_in_game(gm)
     address = get_address(request)
 
-    reverse = player == "Andy"
+    reverse = player.lower() in REVERSE_SORT_PLAYERS
 
     hand = gm.current_round.players[player].hand
     gm.current_round.players[player].hand = hand.sort_cards(reverse)

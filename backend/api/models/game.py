@@ -1,3 +1,4 @@
+import copy
 import random
 from collections import OrderedDict
 
@@ -131,6 +132,10 @@ class Game:
 
     @classmethod
     def from_dict(cls, data):
+        # Copy so the Game never shares nested dicts with the loaded DB value:
+        # in-place edits (e.g. score) would otherwise also change the ORM's
+        # "original" value and SQLAlchemy would skip the UPDATE.
+        data = copy.deepcopy(data)
         game = cls.__new__(cls)
         game.game_id = data['game_id']
         game.mode = data['mode']

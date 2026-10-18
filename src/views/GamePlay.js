@@ -221,6 +221,18 @@ function GamePlay() {
     }
   }
 
+  const congratulate = async () => {
+    if (!window.confirm('Dem anderen Team gratulieren? Dein Team gilt damit als Verlierer und das Spiel wird beendet.')) {
+      return;
+    }
+    try {
+      await apiClient.post(`/games/${gameId}/congratulate`);
+      navigate('/');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Gratulieren fehlgeschlagen');
+    }
+  }
+
   return (
     <div className="App">
       <div className="header-line">
@@ -228,7 +240,10 @@ function GamePlay() {
           Willkommen {auth.username}!{' '}
           <button className="inline-button" onClick={() => navigate('/')}>Zur Übersicht</button>{' '}
           {isActive ? (
-            <button className="inline-button" onClick={giveUp}>Aufgeben</button>
+            <>
+              <button className="inline-button" onClick={congratulate}>Gratulieren</button>{' '}
+              <button className="inline-button" onClick={giveUp}>Aufgeben</button>
+            </>
           ) : null}{' '}
           <button className="inline-button" onClick={auth.logout}>Abmelden</button>
         </p>
