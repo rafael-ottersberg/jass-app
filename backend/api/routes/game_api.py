@@ -369,8 +369,12 @@ def rearrange_cards(game_id):
     hand = gm.current_round.players[player].hand
     hand_cards = hand.get_cards()
 
+    # compare as sorted lists, not sets: a set ignores duplicates, which would
+    # let a player add extra copies of cards they hold
+    is_card_list = isinstance(sorted_hand_cards, list) and all(isinstance(c, str) for c in sorted_hand_cards)
+
     sorting_allowed = False
-    if set(hand_cards) == set(sorted_hand_cards):
+    if is_card_list and sorted(hand_cards) == sorted(sorted_hand_cards):
         hand.remove_all()
 
         for card_string in sorted_hand_cards:

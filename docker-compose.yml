@@ -1,7 +1,7 @@
 services:
   ingress:
     restart: always
-    image: nginx:latest
+    image: nginx:1.30
     volumes:
       - './deployment/nginx.conf:/etc/nginx/nginx.conf'
     ports:

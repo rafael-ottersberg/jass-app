@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
@@ -7,19 +7,7 @@ COPY ./api /app/api
 COPY ./prestart.sh /app/prestart.sh
 COPY ./migrations /app/migrations
 
-RUN apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		gcc \
-		g++ \
-		libffi-dev \
-		libheif-dev \
-		libde265-dev \
-		pkg-config \
-	&& rm -rf /var/lib/apt/lists/*
-
-RUN pip install --no-cache-dir --upgrade "pip>=26.2" "setuptools>=83.0.0" \
-	&& pip install --no-cache-dir --upgrade -r /app/requirements.txt \
-	&& pip install --no-cache-dir --upgrade gunicorn
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 EXPOSE 80
 
