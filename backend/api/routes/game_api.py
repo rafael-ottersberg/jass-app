@@ -76,7 +76,38 @@ def game_summary_dict(record):
         'score': (record.state or {}).get('score', {}),
         'loserTeam': record.loser_team,
         'result': game_result_for_current_user(record),
+        'rematchGameId': record.rematch_game_id,
+        # players who already want the Revanche, so the others see who asked
+        'rematchAcceptedBy': [
+            p['username'] for p in participants_dict(record.rematch_game_id)
+            if p['status'] == 'accepted'
+        ] if record.rematch_game_id else [],
     }
+
+
+def start_game_if_all_accepted(record):
+    all_participants = GameParticipant.query.filter_by(game_id=record.id).order_by(GameParticipant.id).all()
+    if not all(p.status == 'accepted' for p in all_participants):
+        return
+
+    usernames_by_id = {
+        u.id: u.username
+        for u in User.query.filter(User.id.in_([p.user_id for p in all_participants])).all()
+    }
+
+    teams = {}
+    all_usernames = []
+    for p in all_participants:
+        username = usernames_by_id[p.user_id]
+        teams.setdefault(p.team, []).append(username)
+        all_usernames.append(username)
+
+    gm = Game(mode=record.mode, players=all_usernames)
+    gm.start_game(teams)
+
+    record.status = 'active'
+    record.state = gm.to_dict()
+    db.session.commit()
 
 
 TEAM_SIZE_BY_MODE = {'default': 2, 'sidi': 2, 'zweier': 1}
@@ -181,26 +212,7 @@ def respond_to_game(game_id):
     db.session.commit()
 
     if accept:
-        all_participants = GameParticipant.query.filter_by(game_id=game_id).order_by(GameParticipant.id).all()
-        if all(p.status == 'accepted' for p in all_participants):
-            usernames_by_id = {
-                u.id: u.username
-                for u in User.query.filter(User.id.in_([p.user_id for p in all_participants])).all()
-            }
-
-            teams = {}
-            all_usernames = []
-            for p in all_participants:
-                username = usernames_by_id[p.user_id]
-                teams.setdefault(p.team, []).append(username)
-                all_usernames.append(username)
-
-            gm = Game(mode=record.mode, players=all_usernames)
-            gm.start_game(teams)
-
-            record.status = 'active'
-            record.state = gm.to_dict()
-            db.session.commit()
+        start_game_if_all_accepted(record)
 
     return jsonify(game_summary_dict(record))
 
@@ -237,6 +249,8 @@ def delete_game(game_id):
     if record.status == 'active':
         return jsonify({'message': 'Finish or give up an active game before deleting it'}), 400
 
+    # unlink games that point to this one as their Revanche (foreign key)
+    GameRecord.query.filter_by(rematch_game_id=game_id).update({'rematch_game_id': None})
     GameParticipant.query.filter_by(game_id=game_id).delete()
     db.session.delete(record)
     db.session.commit()
@@ -279,6 +293,53 @@ def congratulate(game_id):
     db.session.commit()
 
     return jsonify(game_summary_dict(record))
+
+
+@game_api.route('/api/games/<int:game_id>/rematch', methods=['POST'])
+@require_auth
+def rematch(game_id):
+    # "Revanche": the first player to ask creates a new game with the same
+    # mode and teams; everyone who asks after that accepts its invite. The
+    # new game starts once every player has asked (or accepted the invite).
+    record = GameRecord.query.filter_by(id=game_id).with_for_update().first()
+    if record is None or not is_participant(game_id, g.current_user.id):
+        return jsonify({'message': 'Game not found'}), 404
+
+    if record.status != 'finished' or not record.loser_team:
+        return jsonify({'message': 'Only a won or lost game can be replayed'}), 400
+
+    rematch_record = db.session.get(GameRecord, record.rematch_game_id) if record.rematch_game_id else None
+
+    if rematch_record is None or rematch_record.status in ('cancelled', 'abandoned'):
+        participants = GameParticipant.query.filter_by(game_id=game_id).order_by(GameParticipant.id).all()
+
+        rematch_record = GameRecord(status='lobby', mode=record.mode, created_by_id=g.current_user.id, state=None)
+        db.session.add(rematch_record)
+        db.session.flush()
+
+        # keep the participant order so the seating stays the same
+        for p in participants:
+            db.session.add(GameParticipant(
+                game_id=rematch_record.id,
+                user_id=p.user_id,
+                team=p.team,
+                status='accepted' if p.user_id == g.current_user.id else 'invited',
+            ))
+
+        record.rematch_game_id = rematch_record.id
+        db.session.commit()
+    else:
+        mine = GameParticipant.query.filter_by(game_id=rematch_record.id, user_id=g.current_user.id).first()
+        if mine is not None and mine.status in ('invited', 'declined'):
+            mine.status = 'accepted'
+            db.session.commit()
+            if rematch_record.status == 'lobby':
+                start_game_if_all_accepted(rematch_record)
+        else:
+            # nothing to change, but release the row lock
+            db.session.commit()
+
+    return jsonify(game_summary_dict(rematch_record))
 
 
 @game_api.route('/api/games/<int:game_id>/round-state', methods=['GET'])

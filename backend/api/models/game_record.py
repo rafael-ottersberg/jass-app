@@ -15,3 +15,5 @@ class GameRecord(db.Model):
     state = db.Column(JSONB, nullable=True)
     # set when the losing team congratulates the winners ("Gratulieren")
     loser_team = db.Column(db.String(64), nullable=True)
+    # the "Revanche" game started from this one (same mode and teams)
+    rematch_game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=True)

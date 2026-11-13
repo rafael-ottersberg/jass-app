@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Table from '../Table.js';
 import apiClient from '../api/client';
@@ -10,11 +10,16 @@ function GamePlay() {
   const navigate = useNavigate();
   const { gameId } = useParams();
 
-  const [gameState, setGameState] = useState({
+  const emptyGameState = {
     'status': 'loading',
     'score': {},
     'mode': null,
-  })
+    'result': null,
+    'rematchGameId': null,
+    'rematchAcceptedBy': [],
+    'participants': [],
+  }
+  const [gameState, setGameState] = useState(emptyGameState)
   const [roundState, setRoundState] = useState({
     'roundState': "waiting",
     'orderedPlayers': [],
@@ -27,6 +32,13 @@ function GamePlay() {
   })
 
   const isActive = gameState.status === 'active';
+
+  // a "Revanche" navigates from one game to the next within this view
+  useEffect(() => {
+    setGameState(emptyGameState);
+    getGameState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameId]);
 
   useInterval(() => {
     getGameState();
@@ -200,12 +212,25 @@ function GamePlay() {
       setGameState({
         'status': response.data.status,
         'score': response.data.score,
-        'mode': response.data.mode
+        'mode': response.data.mode,
+        'result': response.data.result,
+        'rematchGameId': response.data.rematchGameId,
+        'rematchAcceptedBy': response.data.rematchAcceptedBy,
+        'participants': response.data.participants,
       });
     } catch (err) {
       if (err.response && err.response.status === 404) {
         navigate('/');
       }
+    }
+  }
+
+  const rematch = async () => {
+    try {
+      const response = await apiClient.post(`/games/${gameId}/rematch`);
+      navigate(`/games/${response.data.id}`);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Revanche fehlgeschlagen');
     }
   }
 
@@ -226,7 +251,8 @@ function GamePlay() {
     }
     try {
       await apiClient.post(`/games/${gameId}/congratulate`);
-      navigate('/');
+      // stay here: the game view now shows the result and the Revanche button
+      getGameState();
     } catch (err) {
       alert(err.response?.data?.message || 'Gratulieren fehlgeschlagen');
     }
@@ -275,10 +301,45 @@ function GamePlay() {
           />
         </div>
       ) : (
-        <p>{gameState.status === 'loading' ? 'Lade Spiel...' : `Dieses Spiel ist nicht (mehr) aktiv (${gameState.status}).`}</p>
+        <GameNotActive gameState={gameState} onRematch={rematch}/>
       )}
     </div>
   );
+}
+
+function GameNotActive({ gameState, onRematch }) {
+  if (gameState.status === 'loading') {
+    return <p>Lade Spiel...</p>;
+  }
+
+  if (gameState.status === 'lobby') {
+    const waitingFor = gameState.participants
+      .filter((p) => p.status !== 'accepted')
+      .map((p) => p.username);
+    return (
+      <p>
+        Warte auf Mitspieler:innen
+        {waitingFor.length > 0 ? `: ${waitingFor.join(', ')}` : ''}...
+      </p>
+    );
+  }
+
+  if (gameState.status === 'finished' && gameState.result) {
+    const requestedBy = gameState.rematchAcceptedBy || [];
+    return (
+      <div>
+        <p><b>{gameState.result === 'won' ? 'Gewonnen!' : 'Verloren.'}</b></p>
+        {requestedBy.length > 0 ? (
+          <p>Revanche angefragt von {requestedBy.join(', ')}</p>
+        ) : null}
+        <button className="inline-button" onClick={onRematch}>
+          {requestedBy.length > 0 ? 'Revanche annehmen' : 'Revanche'}
+        </button>
+      </div>
+    );
+  }
+
+  return <p>Dieses Spiel ist nicht (mehr) aktiv ({gameState.status}).</p>;
 }
 
 function Score(props) {
