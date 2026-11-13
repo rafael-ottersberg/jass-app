@@ -3,12 +3,11 @@ import random
 from collections import OrderedDict
 
 class Game:
-    def __init__(self, game_id=1, mode="default", players = [], final_score=1000):
+    def __init__(self, game_id=1, mode="default", players = []):
         self.game_id = game_id
         self.mode = mode
         self.state = 'joining'
         self.players = players
-        self.final_score = final_score
         self.score = {}
 
     def __str__(self):
@@ -50,13 +49,6 @@ class Game:
         self.start_next_round(first_round=True)
 
 
-    def game_finished(self):
-        finished = False
-        for team in self.score.keys():
-            if self.score[team] >= self.final_score:
-                finished = True
-        return finished
-
     def find_first_player(self):
         return self.sorted_players[0]
 
@@ -97,10 +89,9 @@ class Game:
 
             elif self.current_round.state == "round_finished":
                 # current round is finished
+                # there is no fixed target score: the game only ends when
+                # the losing team congratulates ("Gratulieren")
                 self.add_to_score(self.current_round.count_points())
-
-                if self.game_finished():
-                    self.state = "finished"
 
 
     def start_next_round(self, first_round=False):
@@ -121,7 +112,6 @@ class Game:
             'mode': self.mode,
             'state': self.state,
             'players': self.players,
-            'final_score': self.final_score,
             'score': self.score,
             'teams': self.teams,
             'score_last_round': self.score_last_round,
@@ -141,7 +131,6 @@ class Game:
         game.mode = data['mode']
         game.state = data['state']
         game.players = data['players']
-        game.final_score = data['final_score']
         game.score = data['score']
         game.teams = data['teams']
         game.score_last_round = data['score_last_round']

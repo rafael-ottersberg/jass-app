@@ -99,6 +99,9 @@ export default function GameList() {
   };
 
   const abandonGame = async (gameId) => {
+    if (!window.confirm('Spiel aufgeben? Das Spiel wird ohne Gewinner beendet.')) {
+      return;
+    }
     setError(null);
     try {
       await apiClient.post(`/games/${gameId}/abandon`);

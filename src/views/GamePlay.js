@@ -209,15 +209,14 @@ function GamePlay() {
     }
   }
 
-  const giveUp = async () => {
-    if (!window.confirm('Spiel wirklich aufgeben?')) {
+  const skipRound = async () => {
+    if (!window.confirm('Runde überspringen? Die Karten werden neu verteilt, es werden keine Punkte gezählt.')) {
       return;
     }
     try {
-      await apiClient.post(`/games/${gameId}/abandon`);
-      navigate('/');
+      await apiClient.put(`/games/${gameId}/skip-round`);
     } catch (err) {
-      alert(err.response?.data?.message || 'Aufgeben fehlgeschlagen');
+      alert(err.response?.data?.message || 'Runde überspringen fehlgeschlagen');
     }
   }
 
@@ -242,7 +241,9 @@ function GamePlay() {
           {isActive ? (
             <>
               <button className="inline-button" onClick={congratulate}>Gratulieren</button>{' '}
-              <button className="inline-button" onClick={giveUp}>Aufgeben</button>
+              {roundState.roundState !== 'round_finished' ? (
+                <button className="inline-button" onClick={skipRound}>Runde überspringen</button>
+              ) : null}
             </>
           ) : null}{' '}
           <button className="inline-button" onClick={auth.logout}>Abmelden</button>

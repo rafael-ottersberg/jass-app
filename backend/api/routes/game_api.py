@@ -247,6 +247,8 @@ def delete_game(game_id):
 @game_api.route('/api/games/<int:game_id>/abandon', methods=['POST'])
 @require_auth
 def abandon_game(game_id):
+    # Ends the game without a result (no winner/loser), e.g. for games that
+    # are not going to be finished. Use "Gratulieren" to record a result.
     record, gm = load_active_game(game_id)
     if gm is None:
         return jsonify({'message': 'No active game'}), 404
@@ -443,15 +445,11 @@ def start_next_round(game_id):
     if gm.current_round.state != "round_finished":
         return jsonify({'message': 'Round not finished'}), 400
 
-    if gm.state == "playing":
-        gm.start_next_round()
-        save_game(record, gm)
-        return jsonify({'done': True}), 200
-    else:
-        if gm.state == 'finished':
-            record.status = 'finished'
-        save_game(record, gm)
-        return jsonify({'message': f"Game {gm.state}"}), 200
+    # games saved before the fixed target was removed may still say 'finished'
+    gm.state = 'playing'
+    gm.start_next_round()
+    save_game(record, gm)
+    return jsonify({'done': True}), 200
 
 
 @game_api.route('/api/games/<int:game_id>/skip-round', methods=['PUT'])
@@ -462,6 +460,12 @@ def skip_round(game_id):
         return jsonify({'message': 'No active game'}), 404
 
     require_player_in_game(gm)
+
+    # Skip the current round without counting any points. Once a round is
+    # finished its points are already on the score, so use start-next-round.
+    if gm.current_round.state == "round_finished":
+        return jsonify({'message': 'Round already finished'}), 400
+
     gm.start_next_round()
     save_game(record, gm)
 
